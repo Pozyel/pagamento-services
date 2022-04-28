@@ -12,7 +12,7 @@ import reactor.core.publisher.Mono;
 @Service
 public class EmailClient {
 
-	@Value("${utility.rest.url}")
+	@Value("${utility.rest.email.url}")
 	private String restURL;
 
 	@Value("${email.sendFromAddress}")
@@ -26,12 +26,12 @@ public class EmailClient {
 
 	private String mailEndpoint = "/mail";
 	
-	public void callSendMailService(byte[] content) {
+	public void callSendMailService(byte[] attachment, String subject, String content) {
 
 		String url = restURL + mailEndpoint ;
 		System.out.println("URL: " + url);
 		
-		MailRequestData mrd = new MailRequestData(sendFromAddress, sendPassAddress, sendToAddress, content);
+		MailRequestData mrd = new MailRequestData(sendFromAddress, sendPassAddress, sendToAddress, content, attachment, subject);
 		
 		WebClient
 				.create(url)

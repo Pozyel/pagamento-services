@@ -6,6 +6,8 @@ public class Order {
 
 //	@JsonIgnore
 	public static enum STATUS { FILLED, PENDING, CONFIRMED }
+	
+	public static enum DELIVERY_STATUS { PENDING, ONGOING, DELIVERED }
 
 	private int number;
 
@@ -22,10 +24,18 @@ public class Order {
 
 	private Date paymentDate;
 	
+//delivery
+	private int deliveryStatus;
+
+	private Date deliveryDate;
+
+	private String deliveryCpf;
+	
 	public Order() {
 	}
 
-	public Order(int number, String cpf, float value, int status, Date orderDate, Date issueDate, Date paymentDate) {
+	public Order(int number, String cpf, float value, int status, Date orderDate, Date issueDate, 
+			Date paymentDate, int deliveryStatus, Date deliveryDate, String deliveryCpf) {
 		super();
 		this.number = number;
 		this.cpf = cpf;
@@ -34,6 +44,9 @@ public class Order {
 		this.orderDate = orderDate;
 		this.issueDate = issueDate;
 		this.paymentDate = paymentDate;
+		this.setDeliveryStatus(deliveryStatus);
+		this.setDeliveryDate(deliveryDate);
+		this.setDeliveryCpf(deliveryCpf);
 	}
 
 	public int getNumber() {
@@ -96,6 +109,30 @@ public class Order {
 	public String toString() {
 		return "Order [number=" + number + ", cpf=" + cpf + ", value=" + value + ", status=" + status + ", orderDate="
 				+ orderDate + ", issueDate=" + issueDate + ", paymentDate=" + paymentDate + "]";
+	}
+
+	public int getDeliveryStatus() {
+		return deliveryStatus;
+	}
+
+	public void setDeliveryStatus(int deliveryStatus) {
+		this.deliveryStatus = deliveryStatus;
+	}
+
+	public Date getDeliveryDate() {
+		return deliveryDate;
+	}
+
+	public void setDeliveryDate(Date deliveryDate) {
+		this.deliveryDate = deliveryDate;
+	}
+
+	public String getDeliveryCpf() {
+		return deliveryCpf;
+	}
+
+	public void setDeliveryCpf(String deliveryCpf) {
+		this.deliveryCpf = deliveryCpf;
 	}
 
 }

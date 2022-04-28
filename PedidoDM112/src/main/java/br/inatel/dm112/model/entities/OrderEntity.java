@@ -11,6 +11,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import br.inatel.dm112.model.Order.DELIVERY_STATUS;
 import br.inatel.dm112.model.Order.STATUS;
 
 @Entity
@@ -40,9 +41,20 @@ public class OrderEntity {
 	@Column(name = "dataPagamento", nullable = true)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date paymentDate;
+	
+	@Column(name = "statusEntrega")
+	private int deliveryStatus;
+
+	@Column(name = "dataEntrega", nullable = true)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date deliveryDate;
+
+	@Column(name = "cpfEntrega")
+	private String deliveryCpf;
 
 	public OrderEntity() {
 		this.status = STATUS.FILLED.ordinal();
+		this.status = DELIVERY_STATUS.PENDING.ordinal();
 	}
 
 	public Integer getNumber() {
@@ -101,6 +113,30 @@ public class OrderEntity {
 		this.paymentDate = paymentDate;
 	}
 
+	public int getDeliveryStatus() {
+		return deliveryStatus;
+	}
+
+	public void setDeliveryStatus(int deliveryStatus) {
+		this.deliveryStatus = deliveryStatus;
+	}
+
+	public Date getDeliveryDate() {
+		return deliveryDate;
+	}
+
+	public void setDeliveryDate(Date deliveryDate) {
+		this.deliveryDate = deliveryDate;
+	}
+
+	public String getDeliveryCpf() {
+		return deliveryCpf;
+	}
+
+	public void setDeliveryCpf(String deliveryCpf) {
+		this.deliveryCpf = deliveryCpf;
+	}
+	
 	@Override
 	public String toString() {
 		return "OrderEntity [number=" + number + ", CPF=" + CPF + ", value=" + value + ", status=" + status + ", orderDate="

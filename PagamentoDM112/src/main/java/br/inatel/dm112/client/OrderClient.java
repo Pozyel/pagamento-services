@@ -35,7 +35,11 @@ public class OrderClient {
 		        .header(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
 		        .body(Mono.just(order), Order.class)
 		        .accept(MediaType.APPLICATION_JSON)
-		        .retrieve();
+		        .retrieve()
+		        .bodyToMono(String.class)
+		        .defaultIfEmpty("")
+		        .log()
+		        .block();
 		        //.log()
 
 		System.out.println("Sucesso no createOrder para o pedido: " + order.getNumber());
@@ -92,7 +96,10 @@ public class OrderClient {
 		        .header(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
 		        .body(Mono.just(order), Order.class)
 		        .accept(MediaType.APPLICATION_JSON)
-		        .retrieve();
+		        .retrieve()
+		        .bodyToMono(String.class).defaultIfEmpty("")
+		        .log()
+		        .block();
 
 		System.out.println("Sucesso no updateOrder para o pedido: " + order.getNumber());
 	}

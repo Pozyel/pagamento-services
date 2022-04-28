@@ -6,6 +6,8 @@ public class Order {
 
 //	@JsonIgnore
 	public static enum STATUS { FILLED, PENDING, CONFIRMED }
+	
+	public static enum DELIVERY_STATUS { PENDING, ONGOING, DELIVERED }
 
 	private int number;
 

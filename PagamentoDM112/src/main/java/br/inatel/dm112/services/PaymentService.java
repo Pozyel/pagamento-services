@@ -50,7 +50,7 @@ public class PaymentService {
 			return PaymentStatus.createErrorStatus(cpf, orderNumber, PAY_STATUS.ORDER_NOT_FOUND);
 		}
 		
-		if(order.getStatus() != Order.STATUS.PENDING.ordinal()) {
+		if(order.getStatus() != Order.STATUS.FILLED.ordinal()) {
 			System.out.println("Invalid order status: " + orderNumber + ": " + order.getStatus());
 			return PaymentStatus.createErrorStatus(cpf, orderNumber, PAY_STATUS.WRONG_ORDER_STATUR);
 		}
@@ -74,7 +74,7 @@ public class PaymentService {
 		
 		byte [] PDFContent = respBillet.getPdfContent();
 		try {
-			clientEmail.callSendMailService(PDFContent); //(4) envia email com o pdf
+			clientEmail.callSendMailService(PDFContent, "Boleto", "Boleto gerado pelo sistema de Vendas"); //(4) envia email com o pdf
 		} catch(Exception e ) {
 			System.out.println("Erro no serviço de email");
 			return PaymentStatus.createErrorStatus(cpf, orderNumber, PAY_STATUS.EMAIL_ERROR);
